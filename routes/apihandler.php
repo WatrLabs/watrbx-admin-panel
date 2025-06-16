@@ -137,7 +137,6 @@ $router->group('/api/v1', function($router) {
                         "banneduntil"=>$banneduntil,
                         "moderator"=>$moderatorinfo->id,
                         "moderatornote"=>htmlspecialchars($moderatornote),
-                        "days"=>$daysbanned,
                         "internalnote"=>$internalnote
                     ];
 

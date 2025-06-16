@@ -4,8 +4,8 @@ $pagebuilder = new pagebuilder();
 $pagebuilder->set_page_name("404");
 $pagebuilder->buildheader();
 ?>
-
-<h1>404 - Not Found.</h1>
-
+<div class="main-content">
+    <h1>404 - Not Found.</h1>
+</div>
 </body>
 </html>

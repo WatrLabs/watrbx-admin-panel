@@ -21,16 +21,17 @@
             zoom: 67%;
         }
         .sidebar {
+          height: 200px;
           margin-top: 70px;
           margin-left: 40px;
           margin-right: 40px;
           margin-bottom: 0;
-          width: 350px; /* Adjust the width as needed */
+          width: 350px; 
           border-top: 1px solid #2578BB;
           border-right: 1px solid #2578BB;
           border-left: 1px solid #2578BB;
           border-bottom: 1px solid #2578BB;
-          border-radius: 6px; /* Adjust the border radius as needed */
+          border-radius: 6px;
           z-index: 1;
           overflow-y: auto;
         }
@@ -191,71 +192,24 @@
         input {
             font-size: 22px;
         }
+        #cs-text {
+            color: black;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
     <div class="section">
-        <span>Customer Service & Moderation</span>
+        <span><a href="/" id="cs-text">Customer Service & Moderation</a></span>
         <div class="welcome">Hi <?=$userinfo->username?> (<a href="#">logout</a>)</div>
     </div>
-    <!--
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-    !-->
     <div class="sidebar">
         <h2>Customer Service</h2>
         <h3>User Admin</h3>
         <hr style=";">
         <ul>
-            <li><a href="#">Find user</a></li>
-            <li><a href="#">Find payment</a></li>
-            <li><a href="#">User Asset Transfer</a></li>
-            <li><a href="#">Asset Transfer</a></li>
-            <li><a href="#">User Assets</a></li>
-            <li><a href="#">User/Group Transactions</a></li>
-            <li><a href="#">User Trades</a></li>
-            <li><a href="#">Send Personal Message</a></li>
-            <li><a href="#">User Message</a></li>
-            <li><a href="#">Preset Message</a></li>
-            <li><a href="/MassPasswordReset/index.html">Mass Password Reset</a></li>
+            <li><a href="/">Find user</a></li>
+            <li><a href="/send-message">Send Personal Message</a></li>
         </ul>
-        <h3>Groups</h3>
-        <hr style=";">
-        <ul>
-            <li><a href="#">Group Admin</a></li>
-            <li><a href="#">Group Mass Reward</a></li>
-        </ul>
-        <h3>Cards</h3>
-        <hr style=";">
-        <ul>
-            <li><a href="#">Lookup Game Cards</a></li>
-            <li><a href="#">Incomm Redemption Reversal</a></li>
-            <li><a href="#">Gift Cards</a></li>
-        </ul>
-        <h3>Billing</h3>
-        <hr style=";">
-        <ul>
-            <li><a href="#">Grant Membership</a></li>
-            <li><a href="#">Adjust Assets, Credit & Currency</a></li>
-            <li><a href="#">Imbursements</a></li>
-            <li><a href="#">Imbursements Blacklist</a></li>
-            <li><a href="/MassRefund/index.html">Mass Reward</a></li>
-            <li><a href="#">Reward using CSV</a></li>
-            <li><a href="#">Bundle Purchase Audit Logs</a></li>
-        </ul>
-        <h3>Private Servers</h3>
-        <hr style=";">
-        <ul>
-            <li><a href="#">Private Server Transactions</a></li>
-        </ul>
-        <h3>Policy Labels</h3>
-        <hr style=";">
-        <ul>
-            <li><a href="#">Mass Set Policy Labels</a></li>
-        </ul>
+        
     </div>

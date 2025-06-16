@@ -35,7 +35,7 @@ $router->post('/api/v1/login', function(){
 
         $auth = new authentication();
 
-        $userinfo = $db->table("users")->where("username", $username);
+        $userinfo = $db->table("users")->where("username", $username)->first();
 
         if($userinfo !== null){
             $hashedpass = $userinfo->password;

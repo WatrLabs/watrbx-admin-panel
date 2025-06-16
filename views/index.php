@@ -40,16 +40,7 @@ $pagebuilder->buildheader();
                         </tr>
                     </thead>
                     <tbody id="tablebody">
-                            <tr>
-                                <td><a class="bigger" href="#">igirisujinmario</a></td>
-                                <td class="bigger">6101334907</td>
-                                <td class="bigger">Now</td>
-                                <td class="bigger">None</td>
-                                <td class="bigger">Member</td>
-                                <td class="bigger">02.06.2024</td>
-                                <td class="bigger">17.07.2024</td>
-                                <td class="bigger"><a href="/PerformAction/index.html">Perform Action</a></td>
-                            </tr>
+                            
                         </tbody>
                 </table>
             </div>
@@ -87,8 +78,6 @@ $pagebuilder->buildheader();
             })
             .then(response => response.json())
             .then(data => {
-                table.innerHTML = '';
-
                 const url = `https://www.watrbx.xyz/users/${data.id}/profile`;
 
                 const tabledata = [
@@ -120,6 +109,7 @@ $pagebuilder->buildheader();
                     tr.appendChild(td);
                 });
 
+                table.innerHTML = '';
                 table.appendChild(tr);
             })
             .catch(error => console.error('Error:', error));

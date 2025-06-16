@@ -4,8 +4,8 @@ $pagebuilder = new pagebuilder();
 $pagebuilder->set_page_name("405");
 $pagebuilder->buildheader();
 ?>
-
-<h1>405 - Method not allowed.</h1>
-
+<div class="main-content">
+    <h1>405 - Method not allowed.</h1>
+</div>
 </body>
 </html>
