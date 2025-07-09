@@ -1,12 +1,37 @@
 <?php
 use watrlabs\router\Routing;
+use watrbx\admin;
+use watrbx\messages\templates;
 use watrlabs\authentication;
 global $router; // IMPORTANT: KEEP THIS HERE!
 
 $router->group('/api/v1', function($router) {
 
+    $router->post('/send-personal-message', function(){
+        $auth = new authentication();
+
+        if(isset($_POST["userid"]) && isset($_POST["subject"]) && isset($_POST["content"])){
+            $fromuser = $auth->getuserinfo($_COOKIE["_ROBLOSECURITY"]);
+            $touser = (int)$_POST["userid"];
+
+            $subject = htmlspecialchars($_POST["subject"]);
+            $content = htmlspecialchars($_POST["content"]);
+
+            $admin = new admin();
+
+            $admin::pm_user($touser, $subject, $content);
+            $admin->log_action("send_message", $subject, $fromuser->id);
+            die("user messaged.");
+
+        } else {
+            http_response_code(400);
+            die("Bad Request");
+        }
+    });
+
     $router->post('/moderate-user', function(){
         $auth = new authentication();
+        $admin = new admin();
 
         if(isset($_POST["account-state"]) && isset($_POST["moderatornote"]) && isset($_POST["internalnote"]) && isset($_POST["userid"]) && $auth->hasaccount()){
             global $db;
@@ -134,15 +159,22 @@ $router->group('/api/v1', function($router) {
                         "userid"=>$userid,
                         "type"=>"deleted",
                         "reviewed"=>time(),
-                        "banneduntil"=>$banneduntil,
+                        "banneduntil"=>null,
                         "moderator"=>$moderatorinfo->id,
                         "moderatornote"=>htmlspecialchars($moderatornote),
                         "internalnote"=>$internalnote
                     ];
 
+                    $offendinguser = $auth->getuserbyid($userid);
+
+                    $db->table("users")->where("id", $offendinguser->id)->update(["blurb"=>"[ Content Deleted ]"]);
+                    $db->table("feed")->where("owner", $offendinguser->id)->delete();
+                    $db->table("messages")->where("userfrom", $offendinguser->id)->delete();
                     $db->table("moderation")->insert($insert);
                     break;
             }
+
+            $admin->log_action("moderate_user", $internalnote, $moderatorinfo->id);
 
             die("User Banned.");
 

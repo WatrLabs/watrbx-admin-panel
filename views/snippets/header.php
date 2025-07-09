@@ -209,7 +209,8 @@
         <hr style=";">
         <ul>
             <li><a href="/">Find user</a></li>
-            <li><a href="/send-message">Send Personal Message</a></li>
+            <li><a href="/logs">Recent Action</a></li>
+            <li><a href="/server-info">Server Info</a></li>
         </ul>
         
     </div>

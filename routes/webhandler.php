@@ -21,6 +21,21 @@ $router->get("/login", function() {
     $pagebuilder->get_template("login");
 });
 
+$router->get("/logs", function() {
+    $pagebuilder = new pagebuilder();
+    $pagebuilder->get_template("logs");
+});
+
+$router->get("/server-info", function() {
+    $pagebuilder = new pagebuilder();
+    $pagebuilder->get_template("serverinfo");
+});
+
+$router->get("/{userid}/send-message", function($userid) {
+    $pagebuilder = new pagebuilder();
+    $pagebuilder->get_template("send-message", ["userid"=>$userid]);
+});
+
 $router->get('/moderate/{userid}', function($userid){
     $pagebuilder = new pagebuilder();
     $pagebuilder->get_template("moderate", ["userid"=>$userid]);

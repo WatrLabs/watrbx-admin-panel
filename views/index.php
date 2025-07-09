@@ -37,6 +37,7 @@ $pagebuilder->buildheader();
                             <th class="bold bigger">Creation Date</th>
                             <th class="bold bigger">Last Activity</th>
                             <th class="bold bigger">Action</th>
+                            <th class="bold bigger">Send Personal Message</th>
                         </tr>
                     </thead>
                     <tbody id="tablebody">
@@ -79,6 +80,7 @@ $pagebuilder->buildheader();
             .then(response => response.json())
             .then(data => {
                 const url = `https://www.watrbx.xyz/users/${data.id}/profile`;
+                const msgurl = `/${data.id}/send-message`;
 
                 const tabledata = [
                     { type: "link", text: data.name, href: url },
@@ -88,7 +90,8 @@ $pagebuilder->buildheader();
                     { type: "text", text: data.roleset },
                     { type: "text", text: data.creationdate },
                     { type: "text", text: data.lastactivity },
-                    { type: "link", text: "Perform Action", href: "/moderate/" + data.id }
+                    { type: "link", text: "Perform Action", href: "/moderate/" + data.id },
+                    { type: "link", text: "Send Personal Message", href: msgurl }
                 ];
 
                 const tr = document.createElement("tr");
