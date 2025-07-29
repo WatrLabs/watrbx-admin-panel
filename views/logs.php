@@ -30,8 +30,8 @@ global $db;
                                 foreach($alllogs as $log){?>
                                 <tr>
                                    <td><?=$auth->getuserbyid($log->user)->username?></td>
-                                   <td><?=$log->action?></td>
-                                   <td><?=$log->message?></td>
+                                   <td><?=htmlspecialchars($log->action)?></td>
+                                   <td><?=htmlspecialchars($log->message)?></td>
                                    <td><?=date("n/j/Y", $log->time)?></td> 
                                 </tr>
                                 <? } ?>

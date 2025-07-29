@@ -170,6 +170,7 @@ $router->group('/api/v1', function($router) {
                     $db->table("users")->where("id", $offendinguser->id)->update(["blurb"=>"[ Content Deleted ]"]);
                     $db->table("feed")->where("owner", $offendinguser->id)->delete();
                     $db->table("messages")->where("userfrom", $offendinguser->id)->delete();
+                    $db->table("comments")->where("userid", $offendinguser->id)->delete();
                     $db->table("moderation")->insert($insert);
                     break;
             }
