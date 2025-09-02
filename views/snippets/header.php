@@ -1,7 +1,12 @@
 <?php
+
+    global $db;
+
     use watrlabs\authentication;
     $auth = new authentication();
     $userinfo = $auth->getuserinfo($_COOKIE["_ROBLOSECURITY"]);
+
+    $pendingassets = $db->table("assets")->where("moderation_status", "Pending")->count();
 ?>
 
 
@@ -21,7 +26,7 @@
             zoom: 67%;
         }
         .sidebar {
-          height: 200px;
+          height: 500px;
           margin-top: 70px;
           margin-left: 40px;
           margin-right: 40px;
@@ -211,6 +216,22 @@
             <li><a href="/">Find user</a></li>
             <li><a href="/logs">Recent Action</a></li>
             <li><a href="/server-info">Server Info</a></li>
+        </ul>
+        <h3>Misc</h3>
+        <hr style=";">
+        <ul>
+            <li><a href="/config">Site Configuration</a></li>
+        </ul>
+        <h3>Gameserver Management</h3>
+        <hr style=";">
+        <ul>
+            <li><a href="/gameserver/open-jobs">Open Jobs</a></li>
+        </ul>
+        <h3>Item Management</h3>
+        <hr style=";">
+        <ul>
+            <li><a href="/items/queue">Asset Queue (<?=$pendingassets?>)</a></li>
+            <li><a href="/items/search">Search</a></li>
         </ul>
         
     </div>

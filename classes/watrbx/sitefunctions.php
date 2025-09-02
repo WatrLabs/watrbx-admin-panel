@@ -21,6 +21,78 @@ class sitefunctions {
         $decrypted = openssl_decrypt($text, $this->method, $this->key, 0, $this->iv);
         return $decrypted;
     }
+
+    public function get_friendly_name($assettype){
+        $assettypes = array(
+            'Image' => 1,
+            'TShirt' => 2,
+            'Audio' => 3,
+            'Mesh' => 4,
+            'Lua' => 5,
+            'Hat' => 8,
+            'Place' => 9,
+            'Model' => 10,
+            'Shirt' => 11,
+            'Pants' => 12,
+            'Decal' => 13,
+            'Head' => 17,
+            'Face' => 18,
+            'Gear' => 19,
+            'Badge' => 21,
+            'Animation' => 24,
+            'Torso' => 27,
+            'RightArm' => 28,
+            'LeftArm' => 29,
+            'LeftLeg' => 30,
+            'RightLeg' => 31,
+            'Package' => 32,
+            'GamePass' => 34,
+            'Plugin' => 38,
+            'MeshPart' => 40,
+            'HairAccessory' => 41,
+            'FaceAccessory' => 42,
+            'NeckAccessory' => 43,
+            'ShoulderAccessory' => 44,
+            'FrontAccessory' => 45,
+            'BackAccessory' => 46,
+            'WaistAccessory' => 47,
+            'ClimbAnimation' => 48,
+            'DeathAnimation' => 49,
+            'FallAnimation' => 50,
+            'IdleAnimation' => 51,
+            'JumpAnimation' => 52,
+            'RunAnimation' => 53,
+            'SwimAnimation' => 54,
+            'WalkAnimation' => 55
+        );
+
+        return array_search($assettype, $assettypes);
+    }
+
+    public function format_number($int){
+
+        if($int >= 1000000000){
+            $formated = number_format($int / 1000000000, 1);
+            $suffix = "B+";
+        } elseif($int >= 1000000){
+            $formated = number_format($int / 1000000, 1);
+            $suffix = "M+";
+        } elseif ($int >= 1000){
+            $formated = number_format($int / 1000, 1);
+            $suffix = "K+";
+        } else {
+            $formated = $int;
+            $suffix = "";
+        }
+
+        if (substr($formated, -2) === '.0') {
+            $formated = substr($formated, 0, -2);
+        } else {
+        }
+
+        return $formated . $suffix;
+
+    }
     
     public function getip($encrypt = false) {
         
@@ -149,6 +221,21 @@ class sitefunctions {
 
         $query = $db->table("users")->where("regtime", ">", $adayago);
         return $query->count();
+    }
+
+    static function filter_text($text) 
+    {
+        $badlist = array_filter(explode(",", file_get_contents("../storage/bad_words.txt")));
+        $filterCount = count($badlist);
+
+        for ($i = 0; $i < $filterCount; $i++) {
+            $pattern = '/' . preg_quote($badlist[$i], '/') . '/i';
+            $text = preg_replace_callback($pattern, function($matches) {
+                return str_repeat('#', strlen($matches[0]));
+            }, $text);
+        }
+
+        return $text;
     }
 
     static function isbadtext($text){

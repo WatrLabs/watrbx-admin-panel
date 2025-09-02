@@ -67,6 +67,7 @@ class authentication {
         return $session;
         
     }
+    
 
     public function getmail(){
         return $this->mail;

@@ -6,8 +6,8 @@ $pagebuilder->buildheader();
 
 ?>
     <div class="main-content">
-        <a href="#" class="gray" style="margin-left: 16px">Find Users</a>
-        <a href="#" style="margin-left: 44px">Lookup Tool</a>
+        <a style="margin-left: 44px">Lookup Tool</a>
+        <a href="/find-alt" style="margin-left: 44px">Alt Tool</a>
         <hr class="secondhr">
         <br>
         <br>
@@ -90,7 +90,7 @@ $pagebuilder->buildheader();
                     { type: "text", text: data.roleset },
                     { type: "text", text: data.creationdate },
                     { type: "text", text: data.lastactivity },
-                    { type: "link", text: "Perform Action", href: "/moderate/" + data.id },
+                    { type: "link", text: "Perform Action", href: "/view/" + data.id },
                     { type: "link", text: "Send Personal Message", href: msgurl }
                 ];
 
